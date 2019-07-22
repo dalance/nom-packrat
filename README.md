@@ -57,7 +57,7 @@ fn main() {
 ### Input
 
 The following 8 patterns.
-The first pattern is named as "0pair" and the last is "7pair".
+The first pattern is named as "pair 0" and the last is "pair 7".
 
 ```
 a
