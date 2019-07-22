@@ -18,3 +18,4 @@ nom-packrat-macros = "0.1.0"
 
 [dev-dependencies]
 nom = "5.0.0"
+stats_alloc = "0.1.8"

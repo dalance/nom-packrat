@@ -175,10 +175,6 @@ mod non_packrat_parser {
 
 }
 
-fn init() {
-    crate::PACKRAT_STORAGE.with(|storage| storage.borrow_mut().clear())
-}
-
 static STR_0PAIR: &str = "a";
 static STR_1PAIR: &str = "(a)";
 static STR_2PAIR: &str = "((a))";
@@ -191,7 +187,7 @@ static STR_7PAIR: &str = "(((((((a)))))))";
 #[bench]
 fn bench_0pair_packrat_parser(b: &mut Bencher) {
     b.iter(|| {
-        init();
+        init!();
         packrat_parser::p1(STR_0PAIR)
     })
 }
@@ -199,7 +195,7 @@ fn bench_0pair_packrat_parser(b: &mut Bencher) {
 #[bench]
 fn bench_0pair_packrat_parser_opt(b: &mut Bencher) {
     b.iter(|| {
-        init();
+        init!();
         packrat_parser_opt::p1(STR_0PAIR)
     })
 }
@@ -212,7 +208,7 @@ fn bench_0pair_non_packrat_parser(b: &mut Bencher) {
 #[bench]
 fn bench_1pair_packrat_parser(b: &mut Bencher) {
     b.iter(|| {
-        init();
+        init!();
         packrat_parser::p1(STR_1PAIR)
     })
 }
@@ -220,7 +216,7 @@ fn bench_1pair_packrat_parser(b: &mut Bencher) {
 #[bench]
 fn bench_1pair_packrat_parser_opt(b: &mut Bencher) {
     b.iter(|| {
-        init();
+        init!();
         packrat_parser_opt::p1(STR_1PAIR)
     })
 }
@@ -233,7 +229,7 @@ fn bench_1pair_non_packrat_parser(b: &mut Bencher) {
 #[bench]
 fn bench_2pair_packrat_parser(b: &mut Bencher) {
     b.iter(|| {
-        init();
+        init!();
         packrat_parser::p1(STR_2PAIR)
     })
 }
@@ -241,7 +237,7 @@ fn bench_2pair_packrat_parser(b: &mut Bencher) {
 #[bench]
 fn bench_2pair_packrat_parser_opt(b: &mut Bencher) {
     b.iter(|| {
-        init();
+        init!();
         packrat_parser_opt::p1(STR_2PAIR)
     })
 }
@@ -254,7 +250,7 @@ fn bench_2pair_non_packrat_parser(b: &mut Bencher) {
 #[bench]
 fn bench_3pair_packrat_parser(b: &mut Bencher) {
     b.iter(|| {
-        init();
+        init!();
         packrat_parser::p1(STR_3PAIR)
     })
 }
@@ -262,7 +258,7 @@ fn bench_3pair_packrat_parser(b: &mut Bencher) {
 #[bench]
 fn bench_3pair_packrat_parser_opt(b: &mut Bencher) {
     b.iter(|| {
-        init();
+        init!();
         packrat_parser_opt::p1(STR_3PAIR)
     })
 }
@@ -275,7 +271,7 @@ fn bench_3pair_non_packrat_parser(b: &mut Bencher) {
 #[bench]
 fn bench_4pair_packrat_parser(b: &mut Bencher) {
     b.iter(|| {
-        init();
+        init!();
         packrat_parser::p1(STR_4PAIR)
     })
 }
@@ -283,7 +279,7 @@ fn bench_4pair_packrat_parser(b: &mut Bencher) {
 #[bench]
 fn bench_4pair_packrat_parser_opt(b: &mut Bencher) {
     b.iter(|| {
-        init();
+        init!();
         packrat_parser_opt::p1(STR_4PAIR)
     })
 }
@@ -296,7 +292,7 @@ fn bench_4pair_non_packrat_parser(b: &mut Bencher) {
 #[bench]
 fn bench_5pair_packrat_parser(b: &mut Bencher) {
     b.iter(|| {
-        init();
+        init!();
         packrat_parser::p1(STR_5PAIR)
     })
 }
@@ -304,7 +300,7 @@ fn bench_5pair_packrat_parser(b: &mut Bencher) {
 #[bench]
 fn bench_5pair_packrat_parser_opt(b: &mut Bencher) {
     b.iter(|| {
-        init();
+        init!();
         packrat_parser_opt::p1(STR_5PAIR)
     })
 }
@@ -317,7 +313,7 @@ fn bench_5pair_non_packrat_parser(b: &mut Bencher) {
 #[bench]
 fn bench_6pair_packrat_parser(b: &mut Bencher) {
     b.iter(|| {
-        init();
+        init!();
         packrat_parser::p1(STR_6PAIR)
     })
 }
@@ -325,7 +321,7 @@ fn bench_6pair_packrat_parser(b: &mut Bencher) {
 #[bench]
 fn bench_6pair_packrat_parser_opt(b: &mut Bencher) {
     b.iter(|| {
-        init();
+        init!();
         packrat_parser_opt::p1(STR_6PAIR)
     })
 }
@@ -338,7 +334,7 @@ fn bench_6pair_non_packrat_parser(b: &mut Bencher) {
 #[bench]
 fn bench_7pair_packrat_parser(b: &mut Bencher) {
     b.iter(|| {
-        init();
+        init!();
         packrat_parser::p1(STR_7PAIR)
     })
 }
@@ -346,7 +342,7 @@ fn bench_7pair_packrat_parser(b: &mut Bencher) {
 #[bench]
 fn bench_7pair_packrat_parser_opt(b: &mut Bencher) {
     b.iter(|| {
-        init();
+        init!();
         packrat_parser_opt::p1(STR_7PAIR)
     })
 }
