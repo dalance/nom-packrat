@@ -5,6 +5,11 @@ An extension of [nom](https://docs.rs/nom) to apply "Packrat Parsing".
 [![Crates.io](https://img.shields.io/crates/v/nom-packrat.svg)](https://crates.io/crates/nom-packrat)
 [![Docs.rs](https://docs.rs/nom-packrat/badge.svg)](https://docs.rs/nom-packrat)
 
+## Requirement
+
+nom must be 5.0.0 or later.
+nom-packrat can be applied to function-style parser only.
+
 ## Usage
 
 ```Cargo.toml
@@ -39,6 +44,38 @@ fn main() {
     println!("{:?}", result);
 }
 ```
+
+## Performance
+
+### Syntax
+
+```
+<S> ::= <T> + <S> | <T> - <S> | <T>
+<T> ::= ( <S> ) | a
+```
+
+### Input
+
+The following 8 patterns.
+The first pattern is named as "0pair" and the last is "7pair".
+
+```
+a
+(a)
+((a))
+(((a)))
+((((a))))
+(((((a)))))
+((((((a))))))
+(((((((a)))))))
+```
+
+### Result
+
+ * original   : the original nom parser
+ * packrat    : all parsers with `#[packrat_parser]`
+ * packrat_opt: only `<T>` with `#[packrat_parser]`
+
 
 ## License
 
