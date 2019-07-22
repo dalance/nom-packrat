@@ -1,6 +1,6 @@
 [package]
 name = "nom-packrat"
-version = "0.1.1-pre"
+version = "0.1.1"
 authors = ["dalance <dalance@gmail.com>"]
 repository = "https://github.com/dalance/nom-packrat"
 keywords = ["parser", "nom"]
@@ -11,7 +11,10 @@ description = "An extension of nom to apply Packrat Parsing"
 edition = "2018"
 
 [package.metadata.release]
-disable-tag = true
+pre-release-replacements = [
+    {file = "../README.md", search = "nom-packrat = \"[a-z0-9\\.-]+\"", replace = "nom-packrat = \"{{version}}\""},
+    {file = "Cargo.toml", search = "nom-packrat-macros = \"[a-z0-9\\.-]+\"", replace = "nom-packrat-macros = \"{{version}}\""},
+]
 
 [dependencies]
 nom-packrat-macros = "0.1.0"
