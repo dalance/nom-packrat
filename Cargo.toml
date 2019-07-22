@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "nom-packrat",
+    "nom-packrat-macros",
+]

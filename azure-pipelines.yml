@@ -1,0 +1,40 @@
+trigger:
+    branches:
+        include:
+            - '*'
+    tags:
+        include:
+            - '*'
+
+resources:
+    containers:
+        - container: rust
+          image: rust:latest
+
+jobs:
+    - job: Stable
+      pool:
+          vmImage: 'ubuntu-16.04'
+      container: rust
+      steps:
+          - script: |
+              cargo test
+            displayName: Run test
+
+    - job: Beta
+      pool:
+          vmImage: 'ubuntu-16.04'
+      container: rust
+      steps:
+          - script: |
+              cargo +beta test
+            displayName: Run test
+
+    - job: Nightly
+      pool:
+          vmImage: 'ubuntu-16.04'
+      container: rust
+      steps:
+          - script: |
+              cargo +nightly test
+            displayName: Run test
