@@ -15,3 +15,6 @@ nom-packrat-macros = { path = "../nom-packrat-macros" }
 
 [dev-dependencies]
 nom = "5.0.0"
+
+[package.metadata.release]
+disable-tag = true
