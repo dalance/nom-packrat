@@ -11,13 +11,13 @@ description = "An extension of nom to apply Packrat Parsing"
 edition = "2018"
 
 [package.metadata.release]
+disable-tag = true
 pre-release-replacements = [
     {file = "../README.md", search = "nom-packrat = \"[a-z0-9\\.-]+\"", replace = "nom-packrat = \"{{version}}\""},
-    {file = "Cargo.toml", search = "nom-packrat-macros = \"[a-z0-9\\.-]+\"", replace = "nom-packrat-macros = \"{{version}}\""},
 ]
 
 [dependencies]
-nom-packrat-macros = "0.1.0"
+nom-packrat-macros = {path = "../nom-packrat-macros", version = "0.1.2-pre"}
 
 [dev-dependencies]
 nom = "5.0.0"

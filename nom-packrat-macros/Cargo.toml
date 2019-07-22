@@ -9,9 +9,6 @@ license = "MIT OR Apache-2.0"
 description = "A helper crate of nom-packrat"
 edition = "2018"
 
-[package.metadata.release]
-disable-tag = true
-
 [lib]
 proc-macro = true
 
