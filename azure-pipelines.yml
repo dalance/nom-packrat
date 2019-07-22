@@ -6,17 +6,15 @@ trigger:
         include:
             - '*'
 
-resources:
-    containers:
-        - container: rust
-          image: rust:latest
-
 jobs:
     - job: Stable
       pool:
           vmImage: 'ubuntu-16.04'
-      container: rust
       steps:
+          - script: |
+              curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain stable
+              echo '##vso[task.setvariable variable=PATH]$(PATH):$(HOME)/.cargo/bin'
+            displayName: Install rustup
           - script: |
               cargo test
             displayName: Run test
@@ -24,8 +22,11 @@ jobs:
     - job: Beta
       pool:
           vmImage: 'ubuntu-16.04'
-      container: rust
       steps:
+          - script: |
+              curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain beta
+              echo '##vso[task.setvariable variable=PATH]$(PATH):$(HOME)/.cargo/bin'
+            displayName: Install rustup
           - script: |
               cargo +beta test
             displayName: Run test
@@ -33,8 +34,11 @@ jobs:
     - job: Nightly
       pool:
           vmImage: 'ubuntu-16.04'
-      container: rust
       steps:
+          - script: |
+              curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain nightly
+              echo '##vso[task.setvariable variable=PATH]$(PATH):$(HOME)/.cargo/bin'
+            displayName: Install rustup
           - script: |
               cargo +nightly test
             displayName: Run test
