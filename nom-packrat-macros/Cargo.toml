@@ -1,6 +1,6 @@
 [package]
 name = "nom-packrat-macros"
-version = "0.1.1-pre"
+version = "0.1.1"
 authors = ["dalance <dalance@gmail.com>"]
 repository = "https://github.com/dalance/nom-packrat"
 keywords = ["parser", "nom"]
@@ -9,12 +9,12 @@ license = "MIT OR Apache-2.0"
 description = "A helper crate of nom-packrat"
 edition = "2018"
 
+[package.metadata.release]
+disable-tag = true
+
 [lib]
 proc-macro = true
 
 [dependencies]
 syn = { version = "0.15.18", features = ["full", "fold", "parsing", "extra-traits"] }
 quote = "0.6.9"
-
-[package.metadata.release]
-disable-tag = true
