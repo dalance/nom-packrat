@@ -5,4 +5,5 @@ tag-message                = "Bump version to v{{version}}"
 tag-prefix                 = ""
 pre-release-replacements = [
     {file = "README.md", search = "nom-packrat = \"[a-z0-9\\.-]+\"", replace = "nom-packrat = \"{{version}}\""},
+    {file = "nom-packrat/Cargo.toml", search = "nom-packrat-macros = \"[a-z0-9\\.-]+\"", replace = "nom-packrat-macros = \"{{version}}\""},
 ]

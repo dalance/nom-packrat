@@ -11,7 +11,7 @@ description = "An extension of nom to apply Packrat Parsing"
 edition = "2018"
 
 [dependencies]
-nom-packrat-macros = { path = "../nom-packrat-macros" }
+nom-packrat-macros = "0.1.0"
 
 [dev-dependencies]
 nom = "5.0.0"
