@@ -76,6 +76,10 @@ a
  * packrat    : all parsers with `#[packrat_parser]`
  * packrat_opt: only `<T>` with `#[packrat_parser]`
 
+![speed](https://user-images.githubusercontent.com/4331004/61628860-6634a280-acbe-11e9-9e7b-abbc75bef355.png)
+
+![memory](https://user-images.githubusercontent.com/4331004/61628911-7ba9cc80-acbe-11e9-9306-d1cc24f4a126.png)
+
 
 ## License
 
