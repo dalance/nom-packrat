@@ -10,11 +10,11 @@ readme = "../README.md"
 description = "An extension of nom to apply Packrat Parsing"
 edition = "2018"
 
+[package.metadata.release]
+disable-tag = true
+
 [dependencies]
 nom-packrat-macros = "0.1.0"
 
 [dev-dependencies]
 nom = "5.0.0"
-
-[package.metadata.release]
-disable-tag = true
