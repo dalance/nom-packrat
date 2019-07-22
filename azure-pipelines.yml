@@ -28,7 +28,7 @@ jobs:
               echo '##vso[task.setvariable variable=PATH]$(PATH):$(HOME)/.cargo/bin'
             displayName: Install rustup
           - script: |
-              cargo +beta test
+              cargo test
             displayName: Run test
 
     - job: Nightly
@@ -40,5 +40,5 @@ jobs:
               echo '##vso[task.setvariable variable=PATH]$(PATH):$(HOME)/.cargo/bin'
             displayName: Install rustup
           - script: |
-              cargo +nightly test
+              cargo test
             displayName: Run test
