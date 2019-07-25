@@ -21,7 +21,7 @@ pub fn storage(item: TokenStream) -> TokenStream {
     let t = parse_macro_input!(item as Type);
     let gen = quote! {
         thread_local!(
-            pub static PACKRAT_STORAGE: core::cell::RefCell<
+            pub(crate) static PACKRAT_STORAGE: core::cell::RefCell<
                 std::collections::HashMap<(&'static str, *const u8), Option<(#t, usize)>>
             > = {
                 core::cell::RefCell::new(std::collections::HashMap::new())
