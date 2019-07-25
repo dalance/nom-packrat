@@ -1,6 +1,6 @@
 [package]
 name = "nom-packrat"
-version = "0.1.11-pre"
+version = "0.1.12-pre"
 authors = ["dalance <dalance@gmail.com>"]
 repository = "https://github.com/dalance/nom-packrat"
 keywords = ["parser", "nom"]
@@ -17,8 +17,6 @@ pre-release-replacements = [
 ]
 
 [dependencies]
-nom-packrat-macros = { path = "../nom-packrat-macros", version = "0.1.12-pre" }
-
-[dev-dependencies]
+nom-packrat-macros = { path = "../nom-packrat-macros", version = "0.1.12-pre"}
 nom = "5.0.0"
 stats_alloc = "0.1.8"
