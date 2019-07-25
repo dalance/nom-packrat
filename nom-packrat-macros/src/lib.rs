@@ -68,6 +68,7 @@ fn impl_packrat_parser_bofore(item: &ItemFn) -> Stmt {
 
     parse_quote! {
         let org_input = if let Some(x) = crate::PACKRAT_STORAGE.with(|storage| {
+            use nom::AsBytes;
             if let Some(x) = storage.borrow_mut().get(&(stringify!(#ident), #input.as_bytes().as_ptr())) {
                 if let Some((x, y)) = x {
                     return Some(Some((x.clone(), *y)))
@@ -81,6 +82,8 @@ fn impl_packrat_parser_bofore(item: &ItemFn) -> Stmt {
             if let Some((x, y)) = x {
                 use nom::InputTake;
                 let (s, _) = #input.take_split(y);
+                use std::convert::TryInto;
+                let x = x.try_into().map_err(|_| nom::Err::Error(nom::error::make_error(#input, nom::error::ErrorKind::Fix)))?;
                 return Ok((s, x))
             } else {
                 return Err(nom::Err::Error(nom::error::make_error(#input, nom::error::ErrorKind::Fix)));
@@ -103,12 +106,13 @@ fn impl_packrat_parser_after(item: &ItemFn) -> Stmt {
 
     parse_quote! {
         {
+            use nom::AsBytes;
             let ptr = org_input.as_bytes().as_ptr();
             if let Ok((s, x)) = &body_ret {
                 use nom::Offset;
                 let len = org_input.offset(&s);
                 crate::PACKRAT_STORAGE.with(|storage| {
-                    storage.borrow_mut().insert((stringify!(#ident), ptr), Some((x.clone(), len)));
+                    storage.borrow_mut().insert((stringify!(#ident), ptr), Some(((*x).clone().into(), len)));
                 });
             } else {
                 crate::PACKRAT_STORAGE.with(|storage| {
