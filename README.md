@@ -14,7 +14,7 @@ nom-packrat can be applied to function-style parser only.
 
 ```Cargo.toml
 [dependencies]
-nom-packrat = "0.1.8"
+nom-packrat = "0.1.10"
 ```
 
 ## Example
