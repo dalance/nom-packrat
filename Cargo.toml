@@ -4,5 +4,5 @@ members = [
     "nom-packrat-macros",
 ]
 
-[patch.crates-io]
-nom-packrat-macros = { path = "./nom-packrat-macros" }
+#[patch.crates-io]
+#nom-packrat-macros = { path = "./nom-packrat-macros" }
