@@ -17,6 +17,6 @@ pre-release-replacements = [
 ]
 
 [dependencies]
-nom-packrat-macros = { path = "../nom-packrat-macros", version = "0.1.12-pre"}
+nom-packrat-macros = { path = "../nom-packrat-macros", version = "0.1.13-pre"}
 nom = "5.0.0"
 stats_alloc = "0.1.8"
