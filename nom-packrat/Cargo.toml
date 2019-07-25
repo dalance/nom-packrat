@@ -10,11 +10,11 @@ readme = "../README.md"
 description = "An extension of nom to apply Packrat Parsing"
 edition = "2018"
 
-#[package.metadata.release]
-#disable-tag = true
-#pre-release-replacements = [
-#    {file = "../README.md", search = "nom-packrat = \"[a-z0-9\\.-]+\"", replace = "nom-packrat = \"{{version}}\""},
-#]
+[package.metadata.release]
+disable-tag = true
+pre-release-replacements = [
+    {file = "../README.md", search = "nom-packrat = \"[a-z0-9\\.-]+\"", replace = "nom-packrat = \"{{version}}\""},
+]
 
 [dependencies]
 nom-packrat-macros = {path = "../nom-packrat-macros", version = "0.1.6"}
