@@ -97,7 +97,10 @@ fn impl_packrat_parser_bofore(item: &ItemFn) -> Stmt {
 fn impl_packrat_parser_body(item: &ItemFn) -> Stmt {
     let body = item.block.as_ref();
     parse_quote! {
-        let body_ret = { #body };
+        let body_ret = {
+            let body = || { #body };
+            body()
+        };
     }
 }
 
