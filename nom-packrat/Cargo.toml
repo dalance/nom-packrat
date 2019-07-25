@@ -17,7 +17,7 @@ edition = "2018"
 #]
 
 [dependencies]
-nom-packrat-macros = {path = "../nom-packrat-macros", version = "0.1.5-pre"}
+nom-packrat-macros = {path = "../nom-packrat-macros", version = "0.1.4"}
 
 [dev-dependencies]
 nom = "5.0.0"
