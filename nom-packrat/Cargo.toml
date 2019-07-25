@@ -1,6 +1,6 @@
 [package]
 name = "nom-packrat"
-version = "0.1.16"
+version = "0.1.17"
 authors = ["dalance <dalance@gmail.com>"]
 repository = "https://github.com/dalance/nom-packrat"
 keywords = ["parser", "nom"]
