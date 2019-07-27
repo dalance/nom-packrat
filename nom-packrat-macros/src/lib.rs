@@ -3,33 +3,8 @@
 extern crate proc_macro;
 
 use crate::proc_macro::TokenStream;
-use quote::{quote, ToTokens};
-use syn::{self, parse_macro_input, parse_quote, AttributeArgs, FnArg, ItemFn, Stmt, Type};
-
-/// Declare packrat storage
-///
-/// # Arguments
-/// * An output type of parser. The type must implement `Clone`.
-///
-/// # Examples
-///
-/// ```compile_fail
-/// storage!(String);
-/// ```
-#[proc_macro]
-pub fn storage(item: TokenStream) -> TokenStream {
-    let t = parse_macro_input!(item as Type);
-    let gen = quote! {
-        thread_local!(
-            pub(crate) static PACKRAT_STORAGE: core::cell::RefCell<
-                std::collections::HashMap<(&'static str, *const u8), Option<(#t, usize)>>
-            > = {
-                core::cell::RefCell::new(std::collections::HashMap::new())
-            }
-        );
-    };
-    gen.into()
-}
+use quote::ToTokens;
+use syn::{self, parse_macro_input, parse_quote, AttributeArgs, FnArg, ItemFn, Stmt};
 
 /// Custom attribute for packrat parser
 #[proc_macro_attribute]
@@ -69,7 +44,10 @@ fn impl_packrat_parser_bofore(item: &ItemFn) -> Stmt {
     parse_quote! {
         let org_input = if let Some(x) = crate::PACKRAT_STORAGE.with(|storage| {
             use nom::AsBytes;
-            if let Some(x) = storage.borrow_mut().get(&(stringify!(#ident), #input.as_bytes().as_ptr())) {
+            use nom_packrat::HasExtraState;
+            let ptr = #input.as_bytes().as_ptr();
+            let extra = #input.get_extra_state();
+            if let Some(x) = storage.borrow_mut().get(&(stringify!(#ident), ptr, extra)) {
                 if let Some((x, y)) = x {
                     return Some(Some((x.clone(), *y)))
                 } else {
@@ -110,16 +88,18 @@ fn impl_packrat_parser_after(item: &ItemFn) -> Stmt {
     parse_quote! {
         {
             use nom::AsBytes;
+            use nom_packrat::HasExtraState;
             let ptr = org_input.as_bytes().as_ptr();
+            let extra = org_input.get_extra_state();
             if let Ok((s, x)) = &body_ret {
                 use nom::Offset;
                 let len = org_input.offset(&s);
                 crate::PACKRAT_STORAGE.with(|storage| {
-                    storage.borrow_mut().insert((stringify!(#ident), ptr), Some(((*x).clone().into(), len)));
+                    storage.borrow_mut().insert((stringify!(#ident), ptr, extra), Some(((*x).clone().into(), len)));
                 });
             } else {
                 crate::PACKRAT_STORAGE.with(|storage| {
-                    storage.borrow_mut().insert((stringify!(#ident), ptr), None);
+                    storage.borrow_mut().insert((stringify!(#ident), ptr, extra), None);
                 });
             }
             body_ret
