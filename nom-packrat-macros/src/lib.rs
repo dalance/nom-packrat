@@ -62,8 +62,18 @@ fn impl_packrat_parser_bofore(item: &ItemFn) -> Stmt {
                 let (s, _) = #input.take_split(y);
                 use std::convert::TryInto;
                 let x = x.try_into().map_err(|_| nom::Err::Error(nom::error::make_error(#input, nom::error::ErrorKind::Fix)))?;
+                #[cfg(feature = "trace")]
+                {
+                    use nom_tracable::Tracable;
+                    nom_tracable::custom_trace(&#input, stringify!(#ident), "packrat cache hit (accepted)", "\u{001b}[1;33m")
+                };
                 return Ok((s, x))
             } else {
+                #[cfg(feature = "trace")]
+                {
+                    use nom_tracable::Tracable;
+                    nom_tracable::custom_trace(&#input, stringify!(#ident), "packrat cache hit (rejected)", "\u{001b}[1;33m")
+                };
                 return Err(nom::Err::Error(nom::error::make_error(#input, nom::error::ErrorKind::Fix)));
             }
         } else {
@@ -97,10 +107,20 @@ fn impl_packrat_parser_after(item: &ItemFn) -> Stmt {
                 crate::PACKRAT_STORAGE.with(|storage| {
                     storage.borrow_mut().insert((stringify!(#ident), ptr, extra), Some(((*x).clone().into(), len)));
                 });
+                #[cfg(feature = "trace")]
+                {
+                    use nom_tracable::Tracable;
+                    nom_tracable::custom_trace(&org_input, stringify!(#ident), "packrat cache store (accepted)", "\u{001b}[1;33m");
+                };
             } else {
                 crate::PACKRAT_STORAGE.with(|storage| {
                     storage.borrow_mut().insert((stringify!(#ident), ptr, extra), None);
                 });
+                #[cfg(feature = "trace")]
+                {
+                    use nom_tracable::Tracable;
+                    nom_tracable::custom_trace(&org_input, stringify!(#ident), "packrat cache store (rejected)", "\u{001b}[1;33m");
+                };
             }
             body_ret
         }
