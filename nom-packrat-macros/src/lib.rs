@@ -30,11 +30,11 @@ fn impl_packrat_parser(_attr: &AttributeArgs, item: &ItemFn) -> TokenStream {
 }
 
 fn impl_packrat_parser_bofore(item: &ItemFn) -> Stmt {
-    let ident = &item.ident;
+    let ident = &item.sig.ident;
 
-    let input = if let Some(x) = &item.decl.inputs.first() {
-        match x.value() {
-            FnArg::Captured(arg) => &arg.pat,
+    let input = if let Some(x) = &item.sig.inputs.first() {
+        match x {
+            FnArg::Typed(arg) => &arg.pat,
             _ => panic!("function with #[packrat_parser] must have an argument"),
         }
     } else {
@@ -93,7 +93,7 @@ fn impl_packrat_parser_body(item: &ItemFn) -> Stmt {
 }
 
 fn impl_packrat_parser_after(item: &ItemFn) -> Stmt {
-    let ident = &item.ident;
+    let ident = &item.sig.ident;
 
     parse_quote! {
         {

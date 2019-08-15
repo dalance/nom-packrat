@@ -3,6 +3,7 @@
 ## [Unreleased](https://github.com/dalance/nom-packrat/compare/v0.1.18...Unreleased) - ReleaseDate
 
 * [Added] Support nom-tracable.
+* [Changed] Update nom_locate/syn/quote.
 
 ## [v0.1.18](https://github.com/dalance/nom-packrat/compare/v0.1.17...v0.1.18) - 2019-07-28
 

@@ -6,15 +6,15 @@ repository = "https://github.com/dalance/nom-packrat"
 keywords = ["parser", "nom"]
 categories = ["parsing"]
 license = "MIT OR Apache-2.0"
-description = "A helper crate of nom-packrat"
+description = "Helper crate of nom-packrat"
 edition = "2018"
 
 [lib]
 proc-macro = true
 
 [dependencies]
-quote = "0.6.9"
-syn   = {version = "0.15.18", features = ["full", "fold", "parsing", "extra-traits"]}
+quote = "1.0.0"
+syn   = {version = "1.0.0", features = ["full", "fold", "parsing", "extra-traits"]}
 
 [package.metadata.release]
 disable-tag = true
