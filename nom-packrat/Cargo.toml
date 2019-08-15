@@ -10,14 +10,6 @@ readme = "../README.md"
 description = "Extension of nom to apply Packrat Parsing"
 edition = "2018"
 
-[dependencies]
-nom_locate         = "1.0.0"
-nom-packrat-macros = {path = "../nom-packrat-macros", version = "0.1.16"}
-
-[dev-dependencies]
-nom         = "5.0.0"
-stats_alloc = "0.1.8"
-
 [package.metadata.release]
 pre-release-replacements = [
     {file = "../README.md", search = "nom-packrat = \"[a-z0-9\\.-]+\"", replace = "nom-packrat = \"{{version}}\""},
@@ -25,3 +17,11 @@ pre-release-replacements = [
     {file = "../CHANGELOG.md", search = "ReleaseDate", replace = "{{date}}"},
     {file = "../CHANGELOG.md", search = "Change Log", replace = "Change Log\n\n## [Unreleased](https://github.com/dalance/nom-packrat/compare/v{{version}}...Unreleased) - ReleaseDate"},
 ]
+
+[dependencies]
+nom_locate         = "1.0.0"
+nom-packrat-macros = {path = "../nom-packrat-macros", version = "0.1.16"}
+
+[dev-dependencies]
+nom         = "5.0.0"
+stats_alloc = "0.1.8"
