@@ -3,7 +3,7 @@ use nom::character::complete::*;
 use nom::IResult;
 use nom_packrat::{init, packrat_parser, storage};
 
-storage!(Vec<String>);
+storage!(Vec<String>, 1024);
 
 #[packrat_parser]
 pub fn p1(s: &str) -> IResult<&str, Vec<String>> {

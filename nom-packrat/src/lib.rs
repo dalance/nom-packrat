@@ -33,6 +33,8 @@
 extern crate nom_packrat_macros;
 #[doc(inline)]
 pub use nom_packrat_macros::packrat_parser;
+use std::collections::{HashMap, VecDeque};
+use std::hash::Hash;
 
 /// Initialize packrat storage
 ///
@@ -49,32 +51,96 @@ macro_rules! init {
 ///
 /// # Arguments
 /// * An output type of parser. The type must implement `Clone`.
+/// * (Optional) An extra key type. The type must implement `Eq + Hash + Clone`.
+/// * (Optional) Maximum entries of storage.
 ///
 /// # Examples
 ///
 /// ```compile_fail
 /// storage!(String);
+/// storage!(String, 1024);
+/// storage!(String, ExtraInfo);
+/// storage!(String, ExtraInfo, 1024);
 /// ```
 #[macro_export]
 macro_rules! storage {
     ($t:ty) => {
         thread_local!(
-            pub(crate) static PACKRAT_STORAGE: core::cell::RefCell<
-                std::collections::HashMap<(&'static str, *const u8, ()), Option<($t, usize)>>
+            pub static PACKRAT_STORAGE: core::cell::RefCell<
+                nom_packrat::PackratStorage<$t, ()>
             > = {
-                core::cell::RefCell::new(std::collections::HashMap::new())
+                core::cell::RefCell::new(nom_packrat::PackratStorage::new(None))
             }
         );
     };
     ($t:ty, $u:ty) => {
         thread_local!(
-            pub(crate) static PACKRAT_STORAGE: core::cell::RefCell<
-                std::collections::HashMap<(&'static str, *const u8, $u), Option<($t, usize)>>
+            pub static PACKRAT_STORAGE: core::cell::RefCell<
+                nom_packrat::PackratStorage<$t, $u>
             > = {
-                core::cell::RefCell::new(std::collections::HashMap::new())
+                core::cell::RefCell::new(nom_packrat::PackratStorage::new(None))
             }
         );
     };
+    ($t:ty, $n:expr) => {
+        thread_local!(
+            pub static PACKRAT_STORAGE: core::cell::RefCell<
+                nom_packrat::PackratStorage<$t, ()>
+            > = {
+                core::cell::RefCell::new(nom_packrat::PackratStorage::new(Some($n)))
+            }
+        );
+    };
+    ($t:ty, $u:ty, $n:expr) => {
+        thread_local!(
+            pub static PACKRAT_STORAGE: core::cell::RefCell<
+                nom_packrat::PackratStorage<$t, $u>
+            > = {
+                core::cell::RefCell::new(nom_packrat::PackratStorage::new(Some($n)))
+            }
+        );
+    };
+}
+
+pub struct PackratStorage<T, U> {
+    size: Option<usize>,
+    map: HashMap<(&'static str, *const u8, U), Option<(T, usize)>>,
+    keys: VecDeque<(&'static str, *const u8, U)>,
+}
+
+impl<T, U> PackratStorage<T, U>
+where
+    U: Eq + Hash + Clone,
+{
+    pub fn new(size: Option<usize>) -> Self {
+        let init_size = size.unwrap_or_else(|| 0);
+        PackratStorage {
+            size: size,
+            map: HashMap::with_capacity(init_size),
+            keys: VecDeque::with_capacity(init_size),
+        }
+    }
+
+    pub fn get(&self, key: &(&'static str, *const u8, U)) -> Option<&Option<(T, usize)>> {
+        self.map.get(key)
+    }
+
+    pub fn insert(&mut self, key: (&'static str, *const u8, U), value: Option<(T, usize)>) {
+        if let Some(size) = self.size {
+            if self.keys.len() > size - 1 {
+                let key = self.keys.pop_front().unwrap();
+                self.map.remove(&key);
+            }
+        }
+
+        self.keys.push_back(key.clone());
+        self.map.insert(key, value);
+    }
+
+    pub fn clear(&mut self) {
+        self.map.clear();
+        self.keys.clear();
+    }
 }
 
 pub trait HasExtraState<T> {
