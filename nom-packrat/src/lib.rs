@@ -66,7 +66,7 @@ macro_rules! init {
 macro_rules! storage {
     ($t:ty) => {
         thread_local!(
-            pub static PACKRAT_STORAGE: core::cell::RefCell<
+            pub(crate) static PACKRAT_STORAGE: core::cell::RefCell<
                 nom_packrat::PackratStorage<$t, ()>
             > = {
                 core::cell::RefCell::new(nom_packrat::PackratStorage::new(None))
@@ -75,7 +75,7 @@ macro_rules! storage {
     };
     ($t:ty, $u:ty) => {
         thread_local!(
-            pub static PACKRAT_STORAGE: core::cell::RefCell<
+            pub(crate) static PACKRAT_STORAGE: core::cell::RefCell<
                 nom_packrat::PackratStorage<$t, $u>
             > = {
                 core::cell::RefCell::new(nom_packrat::PackratStorage::new(None))
@@ -84,7 +84,7 @@ macro_rules! storage {
     };
     ($t:ty, $n:expr) => {
         thread_local!(
-            pub static PACKRAT_STORAGE: core::cell::RefCell<
+            pub(crate) static PACKRAT_STORAGE: core::cell::RefCell<
                 nom_packrat::PackratStorage<$t, ()>
             > = {
                 core::cell::RefCell::new(nom_packrat::PackratStorage::new(Some($n)))
@@ -93,7 +93,7 @@ macro_rules! storage {
     };
     ($t:ty, $u:ty, $n:expr) => {
         thread_local!(
-            pub static PACKRAT_STORAGE: core::cell::RefCell<
+            pub(crate) static PACKRAT_STORAGE: core::cell::RefCell<
                 nom_packrat::PackratStorage<$t, $u>
             > = {
                 core::cell::RefCell::new(nom_packrat::PackratStorage::new(Some($n)))
