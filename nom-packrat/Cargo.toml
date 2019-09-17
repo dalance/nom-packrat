@@ -20,7 +20,7 @@ pre-release-replacements = [
 
 [dependencies]
 nom_locate         = "1.0.0"
-nom-packrat-macros = {path = "../nom-packrat-macros", version = "^0.2.0"}
+nom-packrat-macros = {path = "../nom-packrat-macros", version = "^0.3.0"}
 
 [dev-dependencies]
 nom         = "5.0.0"
