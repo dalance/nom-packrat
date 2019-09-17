@@ -1,6 +1,8 @@
 # Change Log
 
-## [Unreleased](https://github.com/dalance/nom-packrat/compare/v0.2.0...Unreleased) - ReleaseDate
+## [Unreleased](https://github.com/dalance/nom-packrat/compare/v0.3.0...Unreleased) - ReleaseDate
+
+## [v0.3.0](https://github.com/dalance/nom-packrat/compare/v0.2.0...v0.3.0) - 2019-09-17
 
 * [Added] Support max cache size.
 
