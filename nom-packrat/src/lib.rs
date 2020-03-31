@@ -167,3 +167,12 @@ where
         self.extra.get_extra_state()
     }
 }
+
+impl<T, U, V> HasExtraState<T> for nom_locate2::LocatedSpan<U, V>
+where
+    V: HasExtraState<T>,
+{
+    fn get_extra_state(&self) -> T {
+        self.extra.get_extra_state()
+    }
+}
