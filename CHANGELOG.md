@@ -2,6 +2,8 @@
 
 ## [Unreleased](https://github.com/dalance/nom-packrat/compare/v0.3.0...Unreleased) - ReleaseDate
 
+* [Added] Support nom_locate v2.0.0 [#2](https://github.com/dalance/nom-packrat/pull/2).
+
 ## [v0.3.0](https://github.com/dalance/nom-packrat/compare/v0.2.0...v0.3.0) - 2019-09-17
 
 * [Added] Support max cache size.
