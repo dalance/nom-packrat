@@ -1,6 +1,8 @@
 # Change Log
 
-## [Unreleased](https://github.com/dalance/nom-packrat/compare/v0.3.0...Unreleased) - ReleaseDate
+## [Unreleased](https://github.com/dalance/nom-packrat/compare/v0.4.0...Unreleased) - ReleaseDate
+
+## [v0.4.0](https://github.com/dalance/nom-packrat/compare/v0.3.0...v0.4.0) - 2020-04-01
 
 * [Added] Support nom_locate v2.0.0 [#2](https://github.com/dalance/nom-packrat/pull/2).
 
