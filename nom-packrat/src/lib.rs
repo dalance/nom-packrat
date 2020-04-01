@@ -159,7 +159,28 @@ impl HasExtraState<()> for &[u8] {
     }
 }
 
+impl<T> HasExtraState<()> for nom_locate::LocatedSpanEx<T, ()> {
+    fn get_extra_state(&self) -> () {
+        ()
+    }
+}
+
 impl<T, U, V> HasExtraState<T> for nom_locate::LocatedSpanEx<U, V>
+where
+    V: HasExtraState<T>,
+{
+    fn get_extra_state(&self) -> T {
+        self.extra.get_extra_state()
+    }
+}
+
+impl<T> HasExtraState<()> for nom_locate2::LocatedSpan<T, ()> {
+    fn get_extra_state(&self) -> () {
+        ()
+    }
+}
+
+impl<T, U, V> HasExtraState<T> for nom_locate2::LocatedSpan<U, V>
 where
     V: HasExtraState<T>,
 {
