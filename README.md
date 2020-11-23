@@ -1,5 +1,5 @@
 # nom-packrat
-Extension of [nom](https://github.com/Geal/nom) to apply "Packrat Parsing".
+Extension of [nom](https://github.com/Geal/nom) to apply ["Packrat Parsing"](https://en.wikipedia.org/wiki/Parsing_expression_grammar#Implementing_parsers_from_parsing_expression_grammars).
 
 [![Actions Status](https://github.com/dalance/nom-packrat/workflows/Regression/badge.svg)](https://github.com/dalance/nom-packrat/actions)
 [![Crates.io](https://img.shields.io/crates/v/nom-packrat.svg)](https://crates.io/crates/nom-packrat)
