@@ -1,7 +1,7 @@
 # nom-packrat
 Extension of [nom](https://github.com/Geal/nom) to apply "Packrat Parsing".
 
-[![Build Status](https://dev.azure.com/dalance/nom-packrat/_apis/build/status/dalance.nom-packrat?branchName=master)](https://dev.azure.com/dalance/nom-packrat/_build/latest?definitionId=1&branchName=master)
+[![Actions Status](https://github.com/dalance/nom-packrat/workflows/Regression/badge.svg)](https://github.com/dalance/nom-packrat/actions)
 [![Crates.io](https://img.shields.io/crates/v/nom-packrat.svg)](https://crates.io/crates/nom-packrat)
 [![Docs.rs](https://docs.rs/nom-packrat/badge.svg)](https://docs.rs/nom-packrat)
 
