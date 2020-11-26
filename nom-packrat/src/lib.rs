@@ -115,7 +115,7 @@ where
     pub fn new(size: Option<usize>) -> Self {
         let init_size = size.unwrap_or_else(|| 0);
         PackratStorage {
-            size: size,
+            size,
             map: HashMap::with_capacity(init_size),
             keys: VecDeque::with_capacity(init_size),
         }
@@ -159,13 +159,13 @@ impl HasExtraState<()> for &[u8] {
     }
 }
 
-impl<T> HasExtraState<()> for nom_locate::LocatedSpanEx<T, ()> {
+impl<T> HasExtraState<()> for nom_locate1::LocatedSpanEx<T, ()> {
     fn get_extra_state(&self) -> () {
         ()
     }
 }
 
-impl<T, U, V> HasExtraState<T> for nom_locate::LocatedSpanEx<U, V>
+impl<T, U, V> HasExtraState<T> for nom_locate1::LocatedSpanEx<U, V>
 where
     V: HasExtraState<T>,
 {
@@ -174,13 +174,13 @@ where
     }
 }
 
-impl<T> HasExtraState<()> for nom_locate2::LocatedSpan<T, ()> {
+impl<T> HasExtraState<()> for nom_locate::LocatedSpan<T, ()> {
     fn get_extra_state(&self) -> () {
         ()
     }
 }
 
-impl<T, U, V> HasExtraState<T> for nom_locate2::LocatedSpan<U, V>
+impl<T, U, V> HasExtraState<T> for nom_locate::LocatedSpan<U, V>
 where
     V: HasExtraState<T>,
 {
