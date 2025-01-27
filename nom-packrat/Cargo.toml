@@ -23,5 +23,5 @@ nom_locate         = "4"
 nom-packrat-macros = {path = "../nom-packrat-macros", version = "^0.7.0" }
 
 [dev-dependencies]
-nom         = "7"
+nom         = "8"
 stats_alloc = "0.1"
